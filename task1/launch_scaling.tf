@@ -11,6 +11,7 @@ resource "aws_launch_configuration" "launch_config" {
   instance_type               = "${var.instance_type}"
   key_name                    = "${aws_key_pair.deployer.id}"
   security_groups             = ["${aws_security_group.webserver_securitygroup.id}"]
+  depends_on                  = [aws_s3_bucket.s3_bucket]
   user_data = filebase64("${path.module}/provision.sh")
 
   lifecycle {
@@ -20,6 +21,7 @@ resource "aws_launch_configuration" "launch_config" {
 
 
 resource "aws_autoscaling_group" "assessment_autoscaling_group" {
+  name		       = "assessment-autoscaling-group"
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
   min_size             = "${var.autoscaling_group_min_size}"
   max_size             = "${var.autoscaling_group_max_size}"

@@ -1,0 +1,16 @@
+{
+
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+ 	    "Principal": {"AWS": "*"},
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*"
+            ],
+	    "Resource": ["arn:aws:s3:::yuvraj-assessment",
+                        "arn:aws:s3:::yuvraj-assessment/*"]
+        }
+    ]
+}
